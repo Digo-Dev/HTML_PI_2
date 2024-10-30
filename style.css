@@ -103,3 +103,135 @@ footer {
   left: 25%;
   right: 25%;
 }
+
+/* src/components/LandingPage.css */
+.landing-page {
+  background-color: #ffffff;
+  color: #000000;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  text-align: center;
+}
+
+.logo {
+  width: 150px;
+  margin: 10px auto;
+}
+
+h1 {
+  color: #003366;
+  font-size: 36px;
+  margin: 0;
+}
+
+h2 {
+  color: #003366;
+  font-size: 24px;
+  margin: 5px 0 20px;
+}
+
+.description {
+  color: #333333;
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.services {
+  text-align: left;
+  max-width: 600px;
+  margin: 0 auto 30px;
+}
+
+.services h3 {
+  color: #003366;
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.services ul {
+  list-style: none;
+  padding: 0;
+}
+
+.services li {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.services a {
+  color: #003366;
+  text-decoration: none;
+}
+
+.services a:hover {
+  text-decoration: underline;
+}
+
+.login-link {
+  margin-top: 20px;
+}
+
+.login-link a {
+  color: #003366;
+  font-weight: bold;
+  font-size: 18px;
+}
+.service-button {
+  display: inline-block;
+  padding: 15px 30px;
+  background-color: #007bff; 
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 8px;
+  text-decoration: none;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); 
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.service-button:hover {
+  background-color: #0056b3; 
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3); 
+}
+/* Estilo do botão para link externo */
+.service-button {
+  display: inline-block;
+  padding: 15px 30px;
+  background-color: #007bff; /* Azul padrão */
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 8px;
+  text-decoration: none;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sombra do botão */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Efeito de transição */
+  margin-top: 20px;
+}
+
+.service-button:hover {
+  background-color: #0056b3; /* Azul mais escuro no hover */
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3); /* Aumenta a sombra no hover */
+}
+
+/* Estilo para o botão de login */
+.login-button {
+  display: inline-block;
+  padding: 15px 30px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 8px;
+  text-decoration: none;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  margin-top: 20px;
+}
+
+.login-button:hover {
+  background-color: #0056b3;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
+}
