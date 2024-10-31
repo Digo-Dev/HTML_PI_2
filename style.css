@@ -235,3 +235,21 @@ h2 {
   background-color: #0056b3;
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
 }
+
+ /* Estilo para chart dos gráficos */
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+}
+h1 {
+  text-align: center;
+  color: #333;
+}
+#servicosChart {
+  max-width: 600px;
+  margin: 20px auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  background-color: #fff;
+}
