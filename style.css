@@ -253,3 +253,23 @@ h1 {
   padding: 20px;
   background-color: #fff;
 }
+
+/* Estilo para dashboard */
+
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+canvas {
+  margin-top: 20px;
+}
+
+select {
+  margin-top: 10px;
+  padding: 5px;
+  font-size: 16px;
+}
