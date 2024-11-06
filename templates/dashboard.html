@@ -30,9 +30,8 @@
 
         async function renderChart() {
             const data = await fetchData();
-            const labels = data.map(item => item[0]); // Local
-            const tipos = data.map(item => item[1]); // Tipo de Serviço
-
+            const labels = data.map(item => item[0]); 
+            const tipos = data.map(item => item[1]); 
             const chartData = {
                 labels: labels,
                 datasets: [{
