@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulário de Solicitação de Serviço</title>
+</head>
+<body>
+  <h2>Solicitação de Serviço</h2>
+
+  <label>Solicitante:</label>
+  <input type="text" id="solicitante" placeholder="Nome do solicitante"><br><br>
+
+  <label>Data:</label>
+  <input type="date" id="data"><br><br>
+
+  <label>Serviço:</label>
+  <input type="text" id="servico" placeholder="Tipo de serviço"><br><br>
+
+  <label>Status:</label>
+  <select id="status">
+    <option value="Iniciada">Iniciada</option>
+    <option value="Em andamento">Em andamento</option>
+    <option value="Cancelada">Cancelada</option>
+    <option value="Serviço realizado">Serviço realizado</option>
+  </select><br><br>
+
+  <label>Responsável:</label>
+  <select id="responsavel">
+    <option value="José">José</option>
+    <option value="João">João</option>
+  </select><br><br>
+
+  <label>Bairro:</label>
+  <select id="bairro">
+    <option value="Gonzaguinha">Gonzaguinha</option>
+    <option value="Beira Mar">Beira Mar</option>
+  </select><br><br>
+
+  <label>Observações (máx. 200 caracteres):</label>
+  <textarea id="observacao" maxlength="200" placeholder="Digite observações aqui"></textarea><br><br>
+
+  <button onclick="enviarDados()">Enviar</button>
+
+  <script>
+    function enviarDados() {
+      const solicitante = document.getElementById("solicitante").value;
+      const data = document.getElementById("data").value;
+      const servico = document.getElementById("servico").value;
+      const status = document.getElementById("status").value;
+      const responsavel = document.getElementById("responsavel").value;
+      const bairro = document.getElementById("bairro").value;
+      const observacao = document.getElementById("observacao").value;
+
+      const url = "URL_DO_APLICATIVhttps://script.google.com/macros/s/AKfycbyRYD8hC7eeFl-2xbqv2TLB1F4pXKRN3ygRNLlh2u-Z3xVVG5qjg72CwGAMiRolc6fZAg/execO_WEB"; 
+
+      fetch(url, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ solicitante, data, servico, status, responsavel, bairro, observacao })
+      }).then(response => {
+        console.log("Dados enviados com sucesso!");
+      }).catch(error => {
+        console.error("Erro ao enviar os dados:", error);
+      });
+    }
+  </script>
+</body>
+</html>
