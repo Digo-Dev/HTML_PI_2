@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt">
+
+<script src="https://cdn.jsdelivr.net/npm/unorm"></script>
+
+
 <head>
   <meta charset="UTF-8">
   <title>Formulário de Solicitação de Serviço</title>
@@ -51,7 +55,7 @@
       const bairro = document.getElementById("bairro").value;
       const observacao = document.getElementById("observacao").value;
 
-      const url = "URL_DO_APLICATIVhttps://script.google.com/macros/s/AKfycbyRYD8hC7eeFl-2xbqv2TLB1F4pXKRN3ygRNLlh2u-Z3xVVG5qjg72CwGAMiRolc6fZAg/execO_WEB"; 
+      const url = "https://script.google.com/macros/s/AKfycbyRYD8hC7eeFl-2xbqv2TLB1F4pXKRN3ygRNLlh2u-Z3xVVG5qjg72CwGAMiRolc6fZAg/execO_WEB"; 
 
       fetch(url, {
         method: "POST",
