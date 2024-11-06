@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './style.css' from css;
 
-ReactDOM.render(
+ReactDOM.StrictMode(
   <React.StrictMode>
     <LandingPage />
   </React.StrictMode>,
