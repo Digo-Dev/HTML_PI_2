@@ -1,84 +1,61 @@
 <!DOCTYPE html>
-<html lang="pt">
-
-<script src="https://cdn.jsdelivr.net/npm/unorm"></script>
-
-
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Formulário de Solicitação de Serviço</title>
+    <meta charset="UTF-8">
+
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
+    <title>Dashboard de Solicitações</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <h2>Solicitação de Serviço</h2>
+    <h1>Solicitações de Serviços</h1>
+    <canvas id="servicosChart" width="400" height="400"></canvas>
+    
+    <a href="https://docs.google.com/spreadsheets/d/1QlgU_VF_UdBq_ESpdOerW-jvxVtnHAFeFU3FUeV8ZRI/edit?usp=sharing" target="_blank">
+        Acesse os dados da planilha
+      </a>
+      
+    
 
-  <label>Solicitante:</label>
-  <input type="text" id="solicitante" placeholder="Nome do solicitante"><br><br>
+    <script>
+        async function fetchData() {
+            const response = await fetch('/api/solicitacoes');
+            const data = await response.json();
+            return data;
+        }
 
-  <label>Data:</label>
-  <input type="date" id="data"><br><br>
+        async function renderChart() {
+            const data = await fetchData();
+            const labels = data.map(item => item[0]); 
+            const tipos = data.map(item => item[1]); 
+            const chartData = {
+                labels: labels,
+                datasets: [{
+                    label: 'Tipo de Serviço',
+                    data: tipos.map(tipo => tipos.filter(t => t === tipo).length),
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            };
 
-  <label>Serviço:</label>
-  <input type="text" id="servico" placeholder="Tipo de serviço"><br><br>
+            const ctx = document.getElementById('servicosChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: chartData,
+                options: {
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        }
 
-  <label>Status:</label>
-  <select id="status">
-    <option value="Iniciada">Iniciada</option>
-    <option value="Em andamento">Em andamento</option>
-    <option value="Cancelada">Cancelada</option>
-    <option value="Serviço realizado">Serviço realizado</option>
-  </select><br><br>
-
-  <label>Responsável:</label>
-  <select id="responsavel">
-    <option value="José">José</option>
-    <option value="João">João</option>
-    <option value="Apolonio">Apolonio</option>
-    <option value="Manoel">Manoel</option>
-    <option value="José Carlos">José Carlos</option>
-  </select><br><br>
-
-  <label>Bairro:</label>
-  <select id="bairro">
-    <option value="Gonzaguinha">Gonzaguinha</option>
-    <option value="Beira Mar">Beira Mar</option>
-    <option value="Boa Vista">Boa Vista</option>
-    <option value="Gleba">Gleba</option>
-    <option value="Quarentenário">Quarentenário</option>
-    <option value="Beira Mar">Beira Mar</option>
-    <option value="Parque das Bandeiras">Parque das Bandeiras</option>
-    <option value="Humaitá">Humaitá</option>
-  </select><br><br>
-
-  <label>Observações (máx. 200 caracteres):</label>
-  <textarea id="observacao" maxlength="200" placeholder="Digite observações aqui"></textarea><br><br>
-
-  <button onclick="enviarDados()">Enviar</button>
-
-  <script>
-    function enviarDados() {
-      const solicitante = document.getElementById("solicitante").value;
-      const data = document.getElementById("data").value;
-      const servico = document.getElementById("servico").value;
-      const status = document.getElementById("status").value;
-      const responsavel = document.getElementById("responsavel").value;
-      const bairro = document.getElementById("bairro").value;
-      const observacao = document.getElementById("observacao").value;
-
-      const url = "https://script.google.com/macros/s/AKfycbyRYD8hC7eeFl-2xbqv2TLB1F4pXKRN3ygRNLlh2u-Z3xVVG5qjg72CwGAMiRolc6fZAg/execO_WEB"; 
-
-      fetch(url, {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ solicitante, data, servico, status, responsavel, bairro, observacao })
-      }).then(response => {
-        console.log("Dados enviados com sucesso!");
-      }).catch(error => {
-        console.error("Erro ao enviar os dados:", error);
-      });
-    }
-  </script>
+        renderChart();
+    </script>
 </body>
 </html>

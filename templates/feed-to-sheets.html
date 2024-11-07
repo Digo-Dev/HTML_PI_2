@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<script src="https://cdn.jsdelivr.net/npm/unorm"></script>
+
+
+<head>
+  <meta charset="UTF-8">
+  <title>Formulário de Solicitação de Serviço</title>
+</head>
+<body>
+  <h2>Solicitação de Serviço</h2>
+
+  <label>Solicitante:</label>
+  <input type="text" id="solicitante" placeholder="Nome do solicitante"><br><br>
+
+  <label>Data:</label>
+  <input type="date" id="data"><br><br>
+
+  <label>Serviço:</label>
+  <input type="text" id="servico" placeholder="Tipo de serviço"><br><br>
+
+  <label>Status:</label>
+  <select id="status">
+    <option value="Iniciada">Iniciada</option>
+    <option value="Em andamento">Em andamento</option>
+    <option value="Cancelada">Cancelada</option>
+    <option value="Serviço realizado">Serviço realizado</option>
+  </select><br><br>
+
+  <label>Responsável:</label>
+  <select id="responsavel">
+    <option value="José">José</option>
+    <option value="João">João</option>
+    <option value="Apolonio">Apolonio</option>
+    <option value="Manoel">Manoel</option>
+    <option value="José Carlos">José Carlos</option>
+  </select><br><br>
+
+  <label>Bairro:</label>
+  <select id="bairro">
+    <option value="Gonzaguinha">Gonzaguinha</option>
+    <option value="Beira Mar">Beira Mar</option>
+    <option value="Boa Vista">Boa Vista</option>
+    <option value="Gleba">Gleba</option>
+    <option value="Quarentenário">Quarentenário</option>
+    <option value="Beira Mar">Beira Mar</option>
+    <option value="Parque das Bandeiras">Parque das Bandeiras</option>
+    <option value="Humaitá">Humaitá</option>
+  </select><br><br>
+
+  <label>Observações (máx. 200 caracteres):</label>
+  <textarea id="observacao" maxlength="200" placeholder="Digite observações aqui"></textarea><br><br>
+
+  <button onclick="enviarDados()">Enviar</button>
+
+  <script>
+    function enviarDados() {
+      const solicitante = document.getElementById("solicitante").value;
+      const data = document.getElementById("data").value;
+      const servico = document.getElementById("servico").value;
+      const status = document.getElementById("status").value;
+      const responsavel = document.getElementById("responsavel").value;
+      const bairro = document.getElementById("bairro").value;
+      const observacao = document.getElementById("observacao").value;
+
+      const url = "htthttps://schttps://script.google.com/macros/s/AKfycbx-zIaMgb7tBHu-0f4YTJk-343ZREe8D5hCrqMMpBSS--d7bJOBkztZao86jN8NiqrdEg/execript.google.com/macros/s/AKfycbxS2xmiy8dSFPsjjfmQ7GhELGOuATko6Xjy33AAUl2FDKwpUfwjtNoWzXGdCbn8LkJfJw/execps://docs.google.com/spreadsheets/d/1QlgU_VF_UdBq_ESpdOerW-jvxVtnHAFeFU3FUeV8ZRI/edit?gid=439178116#gid=439178116"; 
+
+      
+      fetch(url, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ solicitante, data, servico, status, responsavel, bairro, observacao })
+      }).then(response => {
+        console.log("Dados enviados com sucesso!");
+      }).catch(error => {
+        console.error("Erro ao enviar os dados:", error);
+      });
+    }
+  </script>
+</body>
+</html>
