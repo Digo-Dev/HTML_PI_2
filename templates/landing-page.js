@@ -12,7 +12,7 @@ function LandingPage() {
   return (
     <div className="landing-page">
       <header>
-        <img src={logo} alt="Logo da Prefeitura de São Vicente" className="logo" />
+        <img src={index-logo.jpg} alt="Logo da Prefeitura de São Vicente" className="logo" />
         <h1>Prefeitura de São Vicente</h1>
         <h2>Conecta São Vicente - Portal da Zeladoria</h2>
       </header>

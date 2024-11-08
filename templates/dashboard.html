@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Consulta Planilha Análise de Dados</title>
+
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Consulta Planilha Análise de Dados</h1>
+    <h2>Aqui você pode acessar a planilha para consultas e edições</h2>
+
+    <!-- Imagem localizada na pasta "templates" -->
+    <img src="templates/index-logo.html" alt="Logo" style="width: 200px; margin: 20px 0;">
+
+    <canvas id="servicosChart" width="400" height="400"></canvas>
+
+    <div class="button-container">
+        <a href="https://docs.google.com/spreadsheets/d/1QlgU_VF_UdBq_ESpdOerW-jvxVtnHAFeFU3FUeV8ZRI/edit?usp=sharing" target="_blank" class="access-button">
+            Acesse os dados da planilha
+        </a>
+    </div>
+
+    <script>
+        async function fetchData() {
+            const response = await fetch('/api/solicitacoes');
+            const data = await response.json();
+            return data;
+        }
+
+        async function renderChart() {
+            const data = await fetchData();
+            const labels = data.map(item => item[0]);
+            const tipos = data.map(item => item[1]);
+            const chartData = {
+                labels: labels,
+                datasets: [{
+                    label: 'Tipo de Serviço',
+                    data: tipos.map(tipo => tipos.filter(t => t === tipo).length),
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            };
+
+            const ctx = document.getElementById('servicosChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: chartData,
+                options: {
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        }
+
+        renderChart();
+    </script>
+</body>
+</html>
