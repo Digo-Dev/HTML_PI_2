@@ -17,6 +17,9 @@ function LandingPage() {
         <h2>Conecta São Vicente - Portal da Zeladoria</h2>
       </header>
 
+
+      <img src="template/index-logo.jpg" alt="logo da cidade">
+
       <p className="description">
         Aqui, em alguns cliques, você solicita o serviço para cuidar da nossa cidade, consulta o status e manda seu recado!
       </p>
