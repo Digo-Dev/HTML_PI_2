@@ -1,18 +1,176 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gráfico de Solicitações</title>
+    <title>Data Center Portal da Zeladoria</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- falta um script p rodar direito -->
+    <style>
+        body {
+            background-color: black;
+            color: #D3D3D3;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            margin: 0;
+            padding-top: 20px;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            text-align: center;
+            margin: 0;
+        }
+
+        h3 {
+            text-align: center;
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        button {
+            background-color: #1E90FF;
+            color: white;
+            font-size: 14px;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            margin: 10px;
+        }
+
+        button:hover {
+            background-color: #104E8B;
+        }
+
+        .chart-container {
+            width: 80%;
+            max-width: 600px;
+            margin-top: 30px;
+        }
+
+        .legend {
+            margin-top: 20px;
+        }
+
+        .color-box {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+    </style>
 </head>
 <body>
-    <div id="root"></div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
-    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
-    
-    <script src="app.js" defer></script>
+
+    <h2>Data Center Portal da Zeladoria</h2>
+    <h3>Gerar Gráficos</h3>
+
+    <div class="button-group">
+        <button onclick="gerarGraficoBairros()">Bairros que mais solicitam serviços</button>
+        <button onclick="gerarGraficoResponsaveis()">Responsáveis que mais tiveram solicitações</button>
+        <button onclick="gerarGraficoDatas()">Datas com mais solicitações</button>
+    </div>
+
+    <!-- Containers para os gráficos -->
+    <div class="chart-container" id="graficoBairrosContainer">
+        <canvas id="graficoBairros"></canvas>
+    </div>
+
+    <div class="chart-container" id="graficoResponsaveisContainer">
+        <canvas id="graficoResponsaveis"></canvas>
+    </div>
+
+    <div class="chart-container" id="graficoDatasContainer">
+        <canvas id="graficoDatas"></canvas>
+    </div>
+
+    <script>
+        // Função para gerar gráfico de bairros
+        function gerarGraficoBairros() {
+            var ctx = document.getElementById('graficoBairros').getContext('2d');
+            var graficoBairros = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Gonzaguinha', 'Beira Mar', 'Boa Vista', 'Gleba', 'Quarentenário', 'Parque das Bandeiras', 'Humaitá'], // Substituir com dados reais
+                    datasets: [{
+                        label: 'Bairros',
+                        data: [10, 5, 8, 7, 2, 3, 4], // Substituir com dados reais
+                        backgroundColor: ['#FF5733', '#FF8D1A', '#FFD700', '#1E90FF', '#32CD32', '#8A2BE2', '#FF1493'],
+                        borderColor: '#D3D3D3',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                    }
+                }
+            });
+        }
+
+        // Função para gerar gráfico de responsáveis
+        function gerarGraficoResponsaveis() {
+            var ctx = document.getElementById('graficoResponsaveis').getContext('2d');
+            var graficoResponsaveis = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['José', 'João', 'Apolonio', 'Manoel', 'José Carlos'], // Substituir com dados reais
+                    datasets: [{
+                        label: 'Responsáveis',
+                        data: [5, 8, 3, 2, 7], // Substituir com dados reais
+                        backgroundColor: ['#FF6347', '#FF4500', '#ADFF2F', '#FFD700', '#1E90FF'],
+                        borderColor: '#D3D3D3',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                    }
+                }
+            });
+        }
+
+        // Função para gerar gráfico de datas
+        function gerarGraficoDatas() {
+            var ctx = document.getElementById('graficoDatas').getContext('2d');
+            var graficoDatas = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['2024-01-01', '2024-02-01', '2024-03-01'], // Substituir com datas reais
+                    datasets: [{
+                        label: 'Datas',
+                        data: [15, 10, 5], // Substituir com dados reais
+                        backgroundColor: ['#32CD32', '#FFD700', '#1E90FF'],
+                        borderColor: '#D3D3D3',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                    }
+                }
+            });
+        }
+    </script>
+
 </body>
 </html>

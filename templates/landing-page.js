@@ -1,13 +1,3 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './style.css' from css;
-
-ReactDOM.StrictMode(
-  <React.StrictMode>
-    <LandingPage />
-  </React.StrictMode>,
-  document.getElementById('root')
-
 function LandingPage() {
   return (
     <div className="landing-page">
@@ -24,7 +14,6 @@ function LandingPage() {
         Aqui, em alguns cliques, você solicita o serviço para cuidar da nossa cidade, consulta o status e manda seu recado!
       </p>
 
-      {/* botão p conhecer os serviços da prefeitura, acham q fica ok fazer isso ou escreve sobre cada serviço? */}
       <p className="info-link">
         <a
           href="https://www.saovicente.sp.gov.br/categoria/301"
@@ -36,7 +25,6 @@ function LandingPage() {
         </a>
       </p>
 
-      {/* botão de login */}
       <div className="login-button-container">
         <a href="/login" className="login-button">
           Login
@@ -46,4 +34,4 @@ function LandingPage() {
   );
 }
 
-export default LandingPage;
+
