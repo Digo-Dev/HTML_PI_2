@@ -74,12 +74,12 @@
     <h3>Gerar Gráficos</h3>
 
     <div class="button-group">
-        <button onclick="gerarGraficoBairros()">Bairros que mais solicitam serviços</button>
-        <button onclick="gerarGraficoResponsaveis()">Responsáveis que mais tiveram solicitações</button>
-        <button onclick="gerarGraficoDatas()">Datas com mais solicitações</button>
+        <button onclick="gerarGraficoBairros()">Bairros</button>
+        <button onclick="gerarGraficoResponsaveis()">Responsáveis</button>
+        <button onclick="gerarGraficoDatas()">Datas</button>
     </div>
 
-    <!-- Containers para os gráficos -->
+    
     <div class="chart-container" id="graficoBairrosContainer">
         <canvas id="graficoBairros"></canvas>
     </div>
@@ -102,7 +102,7 @@
                     labels: ['Gonzaguinha', 'Beira Mar', 'Boa Vista', 'Gleba', 'Quarentenário', 'Parque das Bandeiras', 'Humaitá'], // Substituir com dados reais
                     datasets: [{
                         label: 'Bairros',
-                        data: [10, 5, 8, 7, 2, 3, 4], // Substituir com dados reais
+                        data: [10, 5, 8, 7, 2, 3, 4],
                         backgroundColor: ['#FF5733', '#FF8D1A', '#FFD700', '#1E90FF', '#32CD32', '#8A2BE2', '#FF1493'],
                         borderColor: '#D3D3D3',
                         borderWidth: 1
