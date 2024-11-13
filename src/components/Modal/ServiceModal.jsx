@@ -80,6 +80,7 @@ const ServiceModal = ({ service, newStatus, onClose, onStatusChange, onUpdateSer
                 <p>Solicitante: {service.user_name}</p>
                 <p>Telefone: {service.user_phone}</p>
 
+
                 <div className="mt-4">
                     <h3 className="font-bold">Anexo:</h3>
                     {service.anexo ? (
@@ -111,7 +112,7 @@ const ServiceModal = ({ service, newStatus, onClose, onStatusChange, onUpdateSer
                         <span className="label-text">Alterar Status</span>
                     </label>
                     <select
-                        className={`select select-bordered w-full ${status === 'Serviço Pausado' ? 'select-secondary' : ''}`} // Condicional para aplicar a classe de destaque
+                        className="select select-bordered w-full"
                         value={status}  // Usa o estado "status"
                         onChange={(e) => {
                             setStatus(e.target.value); // Atualiza o estado de "status"

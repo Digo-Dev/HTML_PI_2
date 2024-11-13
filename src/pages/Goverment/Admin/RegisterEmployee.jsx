@@ -8,19 +8,13 @@ const EmployeeRegisterForm = () => {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [error, setError] = useState(null);
-  const [toastMessage, setToastMessage] = useState('');
-  const [toastType, setToastType] = useState('');
-  const [showToast, setShowToast] = useState(false);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
     const token = localStorage.getItem('authToken'); 
     if (!token) {
-      setToastMessage('Acesso negado. Faça login como administrador.');
-      setToastType('alert-info');
-      setShowToast(true);
-      setTimeout(() => setShowToast(false), 2500); // Esconde o toast após 2.5 segundos
+      setError('Acesso negado. Faça login como administrador.');
       return;
     }
 
@@ -48,16 +42,8 @@ const EmployeeRegisterForm = () => {
       setSenha('');
       setError(null);
 
-      setToastMessage('Funcionário cadastrado com sucesso!');
-      setToastType('alert-success');
-      setShowToast(true);
-      setTimeout(() => setShowToast(false), 2500); // Esconde o toast após 2.5 segundos
-
     } catch (error) {
-      setToastMessage(error.response ? error.response.data.response : 'Erro na conexão com o servidor.');
-      setToastType('alert-error');
-      setShowToast(true);
-      setTimeout(() => setShowToast(false), 2500); // Esconde o toast após 2.5 segundos
+      setError(error.response ? error.response.data.response : 'Erro na conexão com o servidor.');
     }
   };
 
@@ -114,14 +100,6 @@ const EmployeeRegisterForm = () => {
           required
         />
       </div>
-
-      {showToast && (
-        <div className="toast toast-center toast-middle">
-          <div className={`alert ${toastType}`}>
-            <span>{toastMessage}</span>
-          </div>
-        </div>
-      )}
 
       {error && <p className="text-red-500 mt-2">{error}</p>}
 

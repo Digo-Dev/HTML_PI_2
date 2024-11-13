@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import BaseForm from '../../components/BaseForm/BaseForm';
-import InputMask from 'react-input-mask';
-import { useNavigate } from 'react-router-dom';
 
 const bairrosSaoVicente = {
   insular: [
@@ -26,19 +24,16 @@ const ServiceAdd = () => {
   const [desc, setDesc] = useState('');
   const [anexo, setAnexo] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
-  const [toastMessage, setToastMessage] = useState('');
-  const [toastType, setToastType] = useState('');
-  const navigate = useNavigate();
 
   // Recuperar o serviço selecionado do localStorage ao carregar o componente
   useEffect(() => {
     const selectedService = localStorage.getItem('selectedService');
     const serviceDescription = localStorage.getItem('serviceDescription');
-
+    
     if (selectedService) {
       setServico(selectedService); // Define o estado com o serviço recuperado
     }
-
+  
     if (serviceDescription) {
       setDesc(serviceDescription); // Define o estado com a descrição recuperada
     }
@@ -46,12 +41,11 @@ const ServiceAdd = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem('authToken');
+    const token = localStorage.getItem('authToken'); 
 
     if (!token) {
-      setToastMessage("Usuário não autenticado. Por favor, faça login novamente.");
-      setToastType("alert-info");
-      return;
+        alert("Usuário não autenticado. Por favor, faça login novamente.");
+        return;
     }
 
     const formData = new FormData();
@@ -65,41 +59,33 @@ const ServiceAdd = () => {
     if (anexo) formData.append('file', anexo);
 
     try {
-      const response = await fetch('https://orlok.pythonanywhere.com/api/v1/janitorial/', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-        body: formData,
-      });
+        const response = await fetch('https://orlok.pythonanywhere.com/api/v1/janitorial/', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`, 
+            },
+            body: formData,
+        });
 
-      const result = await response.json();
-      if (response.ok) {
-        setToastMessage("Solicitação enviada com sucesso!");
-        setToastType("alert-success");
-
-        // Resetar campos após sucesso
-        setRua('');
-        setBairro('');
-        setNumero('');
-        setArea('');
-        setCep('');
-        setAnexo(null);
-        setImagePreview(null);
-
-        setTimeout(() => {
-          navigate('/HTML_PI_2/home');
-        }, 2500);
-      } else {
-        setToastMessage(`Erro: ${result.error}`);
-        setToastType("alert-info");
-      }
+        const result = await response.json();
+        if (response.ok) {
+            alert('Solicitação enviada com sucesso!');
+            // Resetar campos após sucesso
+            setRua('');
+            setBairro('');
+            setNumero('');
+            setArea('');
+            setCep('');
+            setAnexo(null);
+            setImagePreview(null);
+        } else {
+            alert(`Erro: ${result.error}`);
+        }
     } catch (error) {
-      console.error('Erro ao enviar solicitação:', error);
-      setToastMessage('Erro ao enviar solicitação. Por favor, tente novamente.');
-      setToastType("alert-info");
+        console.error('Erro ao enviar solicitação:', error);
+        alert('Erro ao enviar solicitação. Por favor, tente novamente.');
     }
-  };
+};
 
   const handleanexoChange = (e) => {
     const file = e.target.files[0];
@@ -117,32 +103,31 @@ const ServiceAdd = () => {
 
   return (
     <BaseForm onSubmit={handleFormSubmit}>
+<div>
+  <label htmlFor="servico" className="block text-sm font-medium text-gray-700">Serviço</label>
+  <input
+    type="text"
+    id="servico"
+    value={servico}
+    readOnly
+    placeholder="Digite o serviço"
+    className="input input-bordered w-full mt-1"
+    required
+  />
+</div>
 
-      <div>
-        <label htmlFor="servico" className="block text-sm font-medium text-gray-700">Serviço</label>
-        <input
-          type="text"
-          id="servico"
-          value={servico}
-          readOnly
-          placeholder="Digite o serviço"
-          className="input input-bordered w-full mt-1"
-          required
-        />
-      </div>
-
-      <div>
-        <label htmlFor="desc" className="block text-sm font-medium text-gray-700">Descrição</label>
-        <textarea
-          id="desc"
-          value={desc}
-          readOnly
-          placeholder="Digite a descrição"
-          className="textarea textarea-bordered w-full mt-1"
-          rows="auto"
-          required
-        ></textarea>
-      </div>
+<div>
+  <label htmlFor="desc" className="block text-sm font-medium text-gray-700">Descrição</label>
+  <textarea
+    id="desc"
+    value={desc}
+    readOnly
+    placeholder="Digite a descrição"
+    className="textarea textarea-bordered w-full mt-1"
+    rows="auto"
+    required
+  ></textarea>
+</div>
 
       <div role="alert" className="alert alert-warning">
         <svg
@@ -189,6 +174,7 @@ const ServiceAdd = () => {
         </div>
       </div>
 
+
       <div>
         <label
           htmlFor="bairro"
@@ -211,13 +197,15 @@ const ServiceAdd = () => {
         </select>
       </div>
 
+
       <div>
         <label htmlFor="cep" className="block text-sm font-medium text-gray-700">CEP</label>
-        <InputMask
-          mask="99999-999"
+        <input
+          type="number"
+          id="cep"
           value={cep}
           onChange={(e) => setCep(e.target.value)}
-          placeholder="Digite seu CEP"
+          placeholder="Digite o CEP"
           className="input input-bordered w-full mt-1"
           required
         />
@@ -230,7 +218,7 @@ const ServiceAdd = () => {
           id="rua"
           value={rua}
           onChange={(e) => setRua(e.target.value)}
-          placeholder="Digite o nome da rua"
+          placeholder="Digite a rua"
           className="input input-bordered w-full mt-1"
           required
         />
@@ -243,7 +231,7 @@ const ServiceAdd = () => {
           id="numero"
           value={numero}
           onChange={(e) => setNumero(e.target.value)}
-          placeholder="Número"
+          placeholder="Digite o número"
           className="input input-bordered w-full mt-1"
           required
         />
@@ -281,17 +269,11 @@ const ServiceAdd = () => {
           />
         )}
       </div>
-
-      {toastMessage && (
-        <div className="toast toast-center toast-middle">
-          <div className={`alert ${toastType}`}>
-            <span>{toastMessage}</span>
-          </div>
-        </div>
-      )}
-
+      
     </BaseForm>
+    
   );
+
 };
 
 export default ServiceAdd;

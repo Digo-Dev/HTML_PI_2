@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import InputMask from 'react-input-mask';
-import { useNavigate } from 'react-router-dom'; // Importa o hook useNavigate
 import BaseForm from '../../components/BaseForm/BaseForm';
 
 function SignUp() {
@@ -9,15 +7,8 @@ function SignUp() {
   const [email, setEmail] = useState('');
   const [telefone, setTelefone] = useState('');
   const [senha, setSenha] = useState('');
-  const [toastMessage, setToastMessage] = useState('');
-  const [toastType, setToastType] = useState('');
-  const [showToast, setShowToast] = useState(false);
-
-  const navigate = useNavigate(); // Inicializa o hook para navegação
 
   const handleSignUpSubmit = (e) => {
-    e.preventDefault(); // Previne o comportamento padrão do formulário
-
     axios.post('https://orlok.pythonanywhere.com/api/v1/citizen/', {
       nome: nome,
       email: email,
@@ -26,28 +17,9 @@ function SignUp() {
     })
     .then((response) => {
       console.log(response.data);
-
-      // Mensagem de sucesso
-      setToastMessage('Cadastro realizado com sucesso! Redirecionando para o login...');
-      setToastType('alert-success');
-      setShowToast(true);
-
-      // Redireciona para a página de login após 2.5 segundos
-      setTimeout(() => {
-        setShowToast(false); // Esconde o toast
-        navigate('/HTML_PI_2/login'); // Redireciona para a página de login
-      }, 3000); // 2.5 segundos
     })
     .catch((error) => {
       console.log(error);
-
-      // Mensagem de erro
-      setToastMessage(error.response ? error.response.data.response : 'Erro ao cadastrar. Tente novamente.');
-      setToastType('alert-error');
-      setShowToast(true);
-
-      // Esconde o toast após 2.5 segundos
-      setTimeout(() => setShowToast(false), 2500);
     });
   };
 
@@ -81,8 +53,9 @@ function SignUp() {
 
       <div>
         <label htmlFor="telefone" className="block text-sm font-medium text-gray-700">Telefone</label>
-        <InputMask
-          mask="(99) 99999-9999"
+        <input
+          type="text"
+          id="telefone"
           value={telefone}
           onChange={(e) => setTelefone(e.target.value)}
           placeholder="Digite seu telefone"
@@ -104,13 +77,6 @@ function SignUp() {
         />
       </div>
 
-      {showToast && (
-        <div className="toast toast-center toast-middle">
-          <div className={`alert ${toastType}`}>
-            <span>{toastMessage}</span>
-          </div>
-        </div>
-      )}
     </BaseForm>
   );
 }
